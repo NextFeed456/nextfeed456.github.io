@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextFeed｜クリエイター向けツール＆情報サイト</title>
 
-<meta name="description" content="NextFeedは、動画制作・VTuber・配信者向けの便利ツールや情報を発信するサイトです。YouTube運用をサポートします。">
+<title>NextFeed｜クリエイター向けツール＆情報サイト</title>
+<meta name="description" content="NextFeedは、動画制作・VTuber・配信者向けのツールや情報を発信するサイトです。YouTube運用をサポートします。">
 
 <style>
 body {
@@ -15,22 +15,18 @@ body {
   color: #fff;
 }
 
-/* ヘッダー */
-header {
-  background: #020617;
-  padding: 15px 30px;
+/* ナビ */
+nav {
+  position: absolute;
+  width: 100%;
+  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
+  z-index: 10;
 }
 
 nav a {
-  color: #94a3b8;
+  color: #ccc;
   margin-left: 20px;
   text-decoration: none;
 }
@@ -39,30 +35,30 @@ nav a:hover {
   color: white;
 }
 
-/* ヒーロー */
-.hero {
-  text-align: center;
-  padding: 80px 20px;
+/* ヘッダー */
+.header {
+  height: 420px;
+  background: url('header.png') center/cover no-repeat;
+  position: relative;
 }
 
-.hero h1 {
-  font-size: 32px;
-  margin-bottom: 20px;
+.overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.hero p {
-  color: #94a3b8;
+.overlay h1 {
+  font-size: 40px;
+  margin: 0;
 }
 
-/* ボタン */
-.btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 24px;
-  background: #6366f1;
-  border-radius: 10px;
-  text-decoration: none;
-  color: white;
+.overlay p {
+  color: #cbd5f5;
 }
 
 /* セクション */
@@ -80,6 +76,16 @@ nav a:hover {
   margin-top: 20px;
 }
 
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #6366f1;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+}
+
 /* フッター */
 footer {
   text-align: center;
@@ -92,36 +98,57 @@ footer {
 
 <body>
 
-<header>
-  <div class="logo">NextFeed</div>
-  <nav>
+<!-- ナビ -->
+<nav>
+  <div><strong>NextFeed</strong></div>
+  <div>
     <a href="#">ホーム</a>
-    <a href="tools.html">ツール</a>
-    <a href="#">記事</a>
-  </nav>
+    <a href="#about">概要</a>
+  </div>
+</nav>
+
+<!-- ヘッダー -->
+<header class="header">
+  <div class="overlay">
+    <h1>NextFeed</h1>
+    <p>クリエイターのためのツールと情報</p>
+  </div>
 </header>
 
-<section class="hero">
-  <h1>クリエイターのためのツールと情報</h1>
-  <p>動画制作・VTuber・配信者向けの便利機能を提供</p>
-  <a href="tools.html" class="btn">ツールを見る</a>
-</section>
+<!-- コンテンツ -->
+<section class="section" id="about">
 
-<section class="section">
   <h2>NextFeedとは</h2>
   <p>
-    NextFeedは、動画制作・配信・VTuber活動を支援するためのツールや情報を提供するサイトです。
-    YouTube運用に役立つ機能や、クリエイター向けのノウハウを発信しています。
+    NextFeedは、動画制作・配信・VTuber活動を支援するための情報とツールを提供するサイトです。
+    YouTube運用に役立つ機能や、効率的なコンテンツ制作のためのノウハウを発信しています。
   </p>
 
-  <h2>提供ツール</h2>
+  <p>
+    サムネイル作成、動画編集、分析など、クリエイターに必要な要素をシンプルにまとめ、
+    誰でも使いやすい形で提供することを目的としています。
+  </p>
+
+  <h2>提供コンテンツ</h2>
 
   <div class="card">
     <h3>YouTubeサムネイル保存ツール</h3>
-    <p>URLを入力するだけで高画質サムネイルを取得できます。</p>
-    <a href="tools.html" class="btn">使ってみる</a>
+    <p>
+      動画URLから高画質サムネイルを取得できるツールです。
+      動画制作や分析に活用できます。
+    </p>
+    <a href="https://nextfeed456.github.io/youtubebenri/" class="btn">ツールを見る</a>
   </div>
 
+</section>
+
+<!-- 免責 -->
+<section class="section">
+  <h2>免責事項</h2>
+  <p>
+    本サイトで提供するツールは、公開されている情報を元にした機能を提供しています。
+    取得した画像や情報の利用については、各サービスの規約および権利者のガイドラインに従ってください。
+  </p>
 </section>
 
 <footer>
