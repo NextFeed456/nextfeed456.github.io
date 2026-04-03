@@ -3,6 +3,7 @@
 <head>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9400205162799209"
      crossorigin="anonymous"></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -30,7 +31,6 @@ nav {
 
 nav a {
   color: #ccc;
-  margin-left: 20px;
   text-decoration: none;
 }
 
@@ -64,22 +64,6 @@ nav a:hover {
   color: #cbd5f5;
 }
 
-.sns {
-  margin-bottom: 15px;
-}
-
-.sns a {
-  display: inline-block;
-  margin: 5px 10px;
-  color: #94a3b8;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.sns a:hover {
-  color: white;
-}
-
 /* セクション */
 .section {
   max-width: 900px;
@@ -88,7 +72,6 @@ nav a:hover {
   line-height: 1.8;
 }
 
-/* 中央系 */
 .center-title {
   text-align: center;
   font-size: 24px;
@@ -143,40 +126,15 @@ nav a:hover {
   text-decoration: none;
 }
 
-/* ★Vtuberバナー（進化版） */
+/* Vバナー */
 .v-banner {
   background: linear-gradient(135deg, #7c3aed, #06b6d4);
   padding: 50px 20px;
   border-radius: 16px;
   text-align: center;
   margin-top: 60px;
-  position: relative;
-  overflow: hidden;
 }
 
-/* 光っぽい演出 */
-.v-banner::before {
-  content: "";
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 60%);
-  top: -50%;
-  left: -50%;
-  pointer-events: none; /* ←これ追加 */
-}
-
-/* テキスト */
-.v-banner-text h2 {
-  font-size: 26px;
-  margin-bottom: 10px;
-}
-
-.v-banner-text p {
-  color: #e0f2fe;
-}
-
-/* ボタン */
 .v-btn {
   display: inline-block;
   margin-top: 20px;
@@ -185,24 +143,45 @@ nav a:hover {
   border-radius: 10px;
   color: white;
   text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.v-btn:hover {
-  background: #111827;
-  transform: translateY(-2px);
 }
 
 /* フッター */
-footer {
+.site-footer {
+  margin-top: 60px;
+  padding: 40px 20px;
+  background: rgba(2, 6, 23, 0.95);
+  border-top: 1px solid #334155;
+}
+
+.footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
   text-align: center;
-  padding: 30px;
-  font-size: 12px;
+}
+
+.footer-section {
+  margin-bottom: 20px;
+}
+
+.footer-title {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #38bdf8;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.footer-copy {
+  margin-top: 20px;
+  font-size: 13px;
   color: #64748b;
 }
 
-/* スマホ対応 */
+/* スマホ */
 @media (max-width: 768px) {
   .tool-section {
     flex-direction: column;
@@ -215,10 +194,10 @@ footer {
 
 <!-- ナビ -->
 <nav>
-  <div>
-    <a href="#">ホーム</a>
-    <a href="#about">概要</a>
-  </div>
+  <a href="/">ホーム</a>
+  <a href="#about">概要</a>
+  <a href="/privacy/">ポリシー</a>
+  <a href="/contact/">お問い合わせ</a>
 </nav>
 
 <!-- ヘッダー -->
@@ -238,104 +217,75 @@ footer {
     YouTube運用に役立つ機能や、効率的なコンテンツ制作のためのノウハウを発信しています。
   </p>
 
-  <p class="center-text">
-    サムネイル作成、動画編集、分析など、クリエイターに必要な要素をシンプルにまとめ、<br>
-    誰でも使いやすい形で提供することを目的としています。
-  </p>
-
   <hr class="divider">
 
-  <h2 class="center-title">提供コンテンツ</h2>
+  <h2 class="center-title">提供ツール</h2>
 
   <div class="tool-section">
-
     <div class="tool-text">
       <h3>YouTubeサムネイル保存ツール</h3>
       <p>
-        動画URLから高画質サムネイルを取得できるツールです。<br>
-        動画制作や分析に活用できます。
+        動画URLを入力するだけで、高画質サムネイルを簡単に取得できます。<br>
+        分析や制作に役立つ便利ツールです。
       </p>
-      <a href="https://nextfeed456.github.io/youtubebenri/" class="btn">サムネイルを保存する</a>
+      <a href="/youtubebenri/" class="btn">使ってみる</a>
     </div>
-
-    <div class="tool-image">
-      <img src="thumbnail.png" alt="サムネイルイメージ">
-    </div>
-
-  </div>
-  <!-- サムネ診断ツール -->
-<div class="tool-section">
-
-  <div class="tool-text">
-    <h3>Youtubeサムネイル診断ツール</h3>
-    <p>
-      あなたのサムネイルはクリックされる<br>
-      構成になっていますか？<br>
-      色使い・文字配置・視認性などを分析し、<br>
-      改善ポイントをチェックできます。
-    </p>
-
-    <p>
-      再生数を伸ばしたい方や、サムネに悩んでいる方に<br>
-      おすすめのツールです。
-    </p>
-
-    <a href="https://nextfeed456.github.io/samunesindan/" class="btn">サムネイルを診断する</a>
   </div>
 
-  <div class="tool-image">
-    <img src="thumbnail-check.png" alt="サムネ診断イメージ">
-  </div>
-
-</div>
-
-</section>
-
-<!-- ★VTuber紹介バナー -->
-<section class="section">
-
-  <div class="v-banner">
-
-    <div class="v-banner-text">
-      <h2>VTuber紹介はこちら</h2>
+  <div class="tool-section">
+    <div class="tool-text">
+      <h3>YouTubeサムネイル診断ツール</h3>
       <p>
-        話題のVTuber・注目の配信者をまとめてチェック。<br>
-        新人Vから人気配信者まで、今見るべきVが見つかります。
+        色・文字・構図を分析し、クリック率を改善するためのヒントを提供します。
       </p>
-
-      <a href="https://nextfeed.studio.site/" target="_blank" class="v-btn">
-        紹介ページを見る
-      </a>
+      <a href="/samunesindan/" class="btn">診断する</a>
     </div>
-
   </div>
 
 </section>
 
-<!-- 免責 -->
+<section class="section">
+  <div class="v-banner">
+    <h2>VTuber紹介はこちら</h2>
+    <p>話題のVTuberをチェックできます</p>
+    <a href="https://nextfeed.studio.site/" target="_blank" class="v-btn">見る</a>
+  </div>
+</section>
+
 <section class="section">
   <h2 class="center-title">免責事項</h2>
   <p class="center-text">
-    本サイトで提供するツールは、公開されている情報を元にした機能を提供しています。<br>
-    取得した画像や情報の利用については、各サービスの規約および権利者のガイドラインに従ってください。
+    ツールの利用は各サービスの規約に従ってください。
   </p>
 </section>
 
-<footer>
+<!-- フッター -->
+<footer class="site-footer">
 
-  <div class="sns">
-    <p>公式リンク</p>
+  <div class="footer-inner">
 
-    <a href="https://www.youtube.com/@Next_Feed" target="_blank">
-      ▶ YouTube
-    </a>
+    <div class="footer-section">
+      <p class="footer-title">公式リンク</p>
+      <div class="footer-links">
+        <a href="https://www.youtube.com/@Next_Feed" target="_blank">YouTube</a>
+        <a href="https://x.com/matsun0819" target="_blank">X</a>
+      </div>
+    </div>
 
-    <a href="https://x.com/matsun0819" target="_blank">
-      X（旧Twitter）
-    </a>
+    <div class="footer-section">
+      <p class="footer-title">サイト情報</p>
+      <div class="footer-links">
+        <a href="/privacy/">プライバシーポリシー</a>
+        <a href="/contact/">お問い合わせ</a>
+        <a href="/about/">運営者情報</a>
+      </div>
+    </div>
+
+    <div class="footer-copy">
+      © NextFeed
+    </div>
+
   </div>
-
-  <p>© NextFeed</p>
 
 </footer>
 
