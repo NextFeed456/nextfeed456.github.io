@@ -291,11 +291,12 @@ nav a:hover {
   }
 }
 
-.hero-slider {
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
-  z-index: 5;
+.hero-slider iframe {
+  aspect-ratio: 9 / 16;
+  width: 220px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
 /* スライダーを横中央に */
@@ -522,10 +523,20 @@ const videos = [
   const slider = document.getElementById("slider");
 
 videos.forEach(id => {
+  const wrapper = document.createElement("div");
+  wrapper.style.width = "220px";
+  wrapper.style.aspectRatio = "9/16";
+  wrapper.style.overflow = "hidden";
+  wrapper.style.borderRadius = "10px";
+
   const iframe = document.createElement("iframe");
-  iframe.src = `https://www.youtube.com/embed/${id}?playsinline=1`;
-  iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
-  slider.appendChild(iframe);
+  iframe.src = `https://www.youtube.com/embed/${id}?playsinline=1&modestbranding=1`;
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+  iframe.style.border = "none";
+
+  wrapper.appendChild(iframe);
+  slider.appendChild(wrapper);
 });
 
   document.getElementById("next").onclick = () => {
