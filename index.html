@@ -507,11 +507,12 @@ window.addEventListener("DOMContentLoaded", () => {
         wrapper.classList.add("active");
       }
 
-      const iframe = document.createElement("iframe");
-      iframe.src = `https://www.youtube.com/embed/${id}?playsinline=1`;
-      iframe.style.width = "100%";
-      iframe.style.height = "100%";
-      iframe.style.border = "none";
+  const iframe = document.createElement("iframe");
+  iframe.src = `https://www.youtube.com/embed/${id}?autoplay=0&controls=1&modestbranding=1&rel=0`;
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+  iframe.style.border = "none";
+  iframe.allow = "autoplay; encrypted-media; picture-in-picture";
 
       wrapper.appendChild(iframe);
       slider.appendChild(wrapper);
