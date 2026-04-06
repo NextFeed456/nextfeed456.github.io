@@ -511,19 +511,22 @@ nav a:hover {
 <script>
 window.addEventListener("DOMContentLoaded", () => {
 
-  const videos = [
-    "qsvIayfSZTw",
-    "vfHsV95ZUdE"
-  ];
-
+const videos = [
+  "3Jmz9fhpOBY",
+  "w4Um1RCZ4_8",
+  "wVyVSsjDyk8",
+  "JDlwf7-0mYk",
+  "iCQ2eX3KZhQ",
+  "SMASWupYc5Q"
+];
   const slider = document.getElementById("slider");
 
-  videos.forEach(id => {
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://www.youtube.com/embed/${id}`;
-    iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
-    slider.appendChild(iframe);
-  });
+videos.forEach(id => {
+  const iframe = document.createElement("iframe");
+  iframe.src = `https://www.youtube.com/embed/${id}?playsinline=1`;
+  iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+  slider.appendChild(iframe);
+});
 
   document.getElementById("next").onclick = () => {
     slider.scrollBy({ left: 320, behavior: "smooth" });
