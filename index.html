@@ -48,11 +48,21 @@ nav a:hover {
 }
 
 /* ヘッダー */
-.header {
-  height: 420px;
-  background: url('header.png') center/cover no-repeat;
-  position: relative;
-}
+<header class="header">
+
+  <iframe 
+    src="https://www.youtube.com/embed/vfHsV95ZUdE?autoplay=1&mute=1&loop=1&playlist=vfHsV95ZUdE&controls=0&modestbranding=1"
+    frameborder="0"
+    allow="autoplay; fullscreen">
+  </iframe>
+
+
+  <div class="overlay">
+    <h1>NextFeed</h1>
+    <p>クリエイターのためのツールと情報</p>
+  </div>
+
+</header>
 
 .overlay {
   width: 100%;
@@ -64,6 +74,22 @@ nav a:hover {
   align-items: center;
 }
 
+.header {
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+}
+
+.header iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.77vh;
+  height: 420px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+  
 .overlay h1 {
   font-size: 40px;
   margin: 0;
