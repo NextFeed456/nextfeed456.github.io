@@ -48,21 +48,6 @@ nav a:hover {
 }
 
 /* ヘッダー */
-<header class="header">
-
-  <iframe 
-    src="https://www.youtube.com/embed/vfHsV95ZUdE?autoplay=1&mute=1&loop=1&playlist=vfHsV95ZUdE&controls=0&modestbranding=1"
-    frameborder="0"
-    allow="autoplay; fullscreen">
-  </iframe>
-
-
-  <div class="overlay">
-    <h1>NextFeed</h1>
-    <p>クリエイターのためのツールと情報</p>
-  </div>
-
-</header>
 
 .overlay {
   width: 100%;
@@ -225,6 +210,32 @@ nav a:hover {
     flex-direction: column;
   }
 }
+
+.pc-video {
+  display: block;
+}
+
+.sp-image {
+  display: none;
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* スマホ */
+@media (max-width: 768px) {
+  .pc-video {
+    display: none;
+  }
+
+  .sp-image {
+    display: block;
+  }
+}
+
 </style>
 </head>
 
@@ -240,10 +251,22 @@ nav a:hover {
 
 <!-- ヘッダー -->
 <header class="header">
+
+  <!-- PCだけ動画 -->
+  <iframe class="pc-video"
+    src="https://www.youtube.com/embed/vfHsV95ZUdE?autoplay=1&mute=1&loop=1&playlist=vfHsV95ZUdE&controls=0&modestbranding=1"
+    frameborder="0"
+    allow="autoplay; fullscreen">
+  </iframe>
+
+  <!-- スマホ用画像 -->
+  <img class="sp-image" src="header.png">
+
   <div class="overlay">
     <h1>NextFeed</h1>
     <p>クリエイターのためのツールと情報</p>
   </div>
+
 </header>
 
 <section class="section" id="about">
