@@ -302,16 +302,12 @@ nav a:hover {
 /* スライダーを横中央に */
 .hero-slider .slider {
   display: flex;
-  overflow-x: auto;
-  gap: 10px;
-  padding: 0 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  overflow: hidden;
 }
 
-.hero-slider iframe {
-  min-width: 220px;
-  height: 390px;
-  border-radius: 10px;
-}
 
 /* ボタン */
 .hero-slider button {
@@ -347,6 +343,27 @@ nav a:hover {
 
 .hero-slider iframe {
   opacity: 0.95;
+}
+
+.hero-slider .slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  overflow: hidden;
+}
+
+/* 小さいカード */
+.hero-slider .slider > div {
+  transform: scale(0.8);
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+/* 真ん中だけデカい */
+.hero-slider .active {
+  transform: scale(1);
+  opacity: 1;
 }
   
 </style>
@@ -512,39 +529,54 @@ nav a:hover {
 <script>
 window.addEventListener("DOMContentLoaded", () => {
 
-const videos = [
-  "3Jmz9fhpOBY",
-  "w4Um1RCZ4_8",
-  "wVyVSsjDyk8",
-  "JDlwf7-0mYk",
-  "iCQ2eX3KZhQ",
-  "SMASWupYc5Q"
-];
+  const videos = [
+    "3Jmz9fhpOBY",
+    "w4Um1RCZ4_8",
+    "wVyVSsjDyk8",
+    "JDlwf7-0mYk",
+    "iCQ2eX3KZhQ",
+    "SMASWupYc5Q"
+  ];
+
   const slider = document.getElementById("slider");
 
-videos.forEach(id => {
-  const wrapper = document.createElement("div");
-  wrapper.style.width = "220px";
-  wrapper.style.aspectRatio = "9/16";
-  wrapper.style.overflow = "hidden";
-  wrapper.style.borderRadius = "10px";
+  let current = 0;
 
-  const iframe = document.createElement("iframe");
-  iframe.src = `https://www.youtube.com/embed/${id}?playsinline=1&modestbranding=1`;
-  iframe.style.width = "100%";
-  iframe.style.height = "100%";
-  iframe.style.border = "none";
+  function renderSlider() {
+    slider.innerHTML = "";
 
-  wrapper.appendChild(iframe);
-  slider.appendChild(wrapper);
-});
+    videos.forEach((id, index) => {
+      const wrapper = document.createElement("div");
+      wrapper.style.width = "260px";
+      wrapper.style.aspectRatio = "9/16";
+      wrapper.style.overflow = "hidden";
+      wrapper.style.borderRadius = "12px";
+
+      if (index === current) {
+        wrapper.classList.add("active");
+      }
+
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube.com/embed/${id}?playsinline=1`;
+      iframe.style.width = "100%";
+      iframe.style.height = "100%";
+      iframe.style.border = "none";
+
+      wrapper.appendChild(iframe);
+      slider.appendChild(wrapper);
+    });
+  }
+
+  renderSlider();
 
   document.getElementById("next").onclick = () => {
-    slider.scrollBy({ left: 320, behavior: "smooth" });
+    current = (current + 1) % videos.length;
+    renderSlider();
   };
 
   document.getElementById("prev").onclick = () => {
-    slider.scrollBy({ left: -320, behavior: "smooth" });
+    current = (current - 1 + videos.length) % videos.length;
+    renderSlider();
   };
 
 });
