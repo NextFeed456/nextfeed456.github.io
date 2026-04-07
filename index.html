@@ -273,6 +273,15 @@ nav a:hover {
   cursor: pointer;
   transition: 0.3s;
 }
+#left2, #right2 {
+  height: 55%;
+  opacity: 0.15;
+}
+
+#left, #right {
+  height: 70%;
+  opacity: 0.3;
+}
 
 .side:hover {
   opacity: 0.8;
@@ -338,11 +347,13 @@ nav a:hover {
 
   <button class="nav-btn left-btn">◀</button>
 
-  <img id="left" class="side">
+<img id="left2" class="side">
+<img id="left" class="side">
 
-  <div class="main" id="mainArea"></div>
+<div class="main" id="mainArea"></div>
 
-  <img id="right" class="side">
+<img id="right" class="side">
+<img id="right2" class="side">
 
   <button class="nav-btn right-btn">▶</button>
 
@@ -490,6 +501,8 @@ window.addEventListener("DOMContentLoaded", () => {
   const mainArea = document.getElementById("mainArea");
   const left = document.getElementById("left");
   const right = document.getElementById("right");
+  const left2 = document.getElementById("left2");
+  const right2 = document.getElementById("right2");
   const prevBtn = document.querySelector(".left-btn");
   const nextBtn = document.querySelector(".right-btn");
 
@@ -508,6 +521,14 @@ function update() {
 
   right.src = `https://img.youtube.com/vi/${
     videos[(current + 1) % videos.length]
+  }/maxresdefault.jpg`;
+
+  left2.src = `https://img.youtube.com/vi/${
+    videos[(current - 2 + videos.length) % videos.length]
+  }/maxresdefault.jpg`;
+
+  right2.src = `https://img.youtube.com/vi/${
+    videos[(current + 2) % videos.length]
   }/maxresdefault.jpg`;
 }
 
