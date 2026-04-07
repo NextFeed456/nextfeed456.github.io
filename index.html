@@ -64,7 +64,7 @@ nav a:hover {
 .header {
   position: relative;
   height: 420px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .header iframe {
@@ -311,9 +311,9 @@ nav a:hover {
 .hero-slider .slider {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 20px;
-  overflow: auto;
+  overflow-x: hidden;
   position: relative; 
   z-index: 5;
 }
@@ -489,33 +489,39 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const slider = document.getElementById("slider");
 
-  let current = 0;
+let current = 0;
 
-  function renderSlider() {
-    slider.innerHTML = "";
+function renderSlider() {
+  slider.innerHTML = "";
 
-    videos.forEach((id, index) => {
+  videos.forEach((id, index) => {
+if (
+  index === current ||
+  index === (current - 1 + videos.length) % videos.length ||
+  index === (current + 1) % videos.length
+)
+{
+
       const wrapper = document.createElement("div");
-      wrapper.style.width = "260px";
+      wrapper.style.width = index === current ? "300px" : "220px";
       wrapper.style.aspectRatio = "9/16";
-      wrapper.style.overflow = "hidden";
-      wrapper.style.borderRadius = "12px";
+      wrapper.style.opacity = index === current ? "1" : "0.5";
+      wrapper.style.transition = "0.3s";
+      wrapper.style.margin = "0 10px";
+      wrapper.style.transform = index === current ? "scale(1.1)" : "scale(0.9)";
+      wrapper.style.transition = "0.3s";
 
-      if (index === current) {
-        wrapper.classList.add("active");
-      }
-
-  const iframe = document.createElement("iframe");
-  iframe.src = `https://www.youtube.com/embed/${id}?autoplay=0&controls=1&modestbranding=1&rel=0`;
-  iframe.style.width = "100%";
-  iframe.style.height = "100%";
-  iframe.style.border = "none";
-  iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube.com/embed/${id}?controls=1`;
+      iframe.style.width = "100%";
+      iframe.style.height = "100%";
+      iframe.style.border = "none";
 
       wrapper.appendChild(iframe);
       slider.appendChild(wrapper);
-    });
-  }
+    }
+  });
+}
 
   renderSlider();
 
