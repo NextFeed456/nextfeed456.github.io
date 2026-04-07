@@ -285,6 +285,14 @@ nav a:hover {
   cursor: pointer;
   position: relative;
 }
+
+.main img {
+  object-fit: cover;
+}
+
+.side {
+  object-fit: cover;
+}
   
 </style>
 </head>
@@ -454,7 +462,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function update() {
     mainArea.innerHTML = `
-      <img src="https://img.youtube.com/vi/${videos[current]}/hqdefault.jpg">
+      <img src="https://img.youtube.com/vi/${videos[current]}/maxresdefault.jpg">
     `;
 
     left.src = `https://img.youtube.com/vi/${
