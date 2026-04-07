@@ -32,14 +32,17 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
   padding: 15px 40px;
   display: flex;
   gap: 20px;
   z-index: 9999;
+
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(6px);
-  border-radius: 0 0 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
+  
 nav a {
   color: #ccc;
   text-decoration: none;
@@ -226,11 +229,6 @@ nav a:hover {
   margin: 60px 0;
 }
 
-
-  background: linear-gradient(135deg, #020617, #0f172a);
-}
-
-
 .header::after {
   content: "";
   position: absolute;
@@ -241,6 +239,7 @@ nav a:hover {
 }
 
 .hero {
+  margin-top: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -251,7 +250,8 @@ nav a:hover {
 }
 
 .main {
-  width: 320px;
+  height: 90%;
+  max-height: 420px; 
   aspect-ratio: 9/16;
   cursor: pointer;
   position: relative;
@@ -276,13 +276,6 @@ nav a:hover {
   opacity: 0.8;
 }
 
-.main {
-  height: 90%; /* ヘッダーにフィット */
-  aspect-ratio: 9/16;
-  cursor: pointer;
-  position: relative;
-}
-
 .main img {
   object-fit: cover;
 }
@@ -296,19 +289,10 @@ nav a:hover {
   object-position: center top;
 }
 
-.hero {
-  z-index: 5;
-}
-
 .overlay {
   z-index: 10;
 }
 
-nav {
-  width: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
   
 </style>
 </head>
