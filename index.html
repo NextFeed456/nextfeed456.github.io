@@ -65,6 +65,15 @@ nav a:hover {
   position: relative;
   height: 460px;
   overflow: hidden;
+  background-image: radial-gradient(circle at center, rgba(99,102,241,0.2), transparent 70%);
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1;
 }
   
 .overlay h1 {
@@ -215,7 +224,7 @@ nav a:hover {
   margin: 60px 0;
 }
 
-.header {
+
   background: linear-gradient(135deg, #020617, #0f172a);
 }
 
@@ -283,6 +292,14 @@ nav a:hover {
 .main img,
 .side {
   object-position: center top;
+}
+
+.hero {
+  z-index: 5;
+}
+
+.overlay {
+  z-index: 10;
 }
   
 </style>
@@ -451,29 +468,23 @@ window.addEventListener("DOMContentLoaded", () => {
   const left = document.getElementById("left");
   const right = document.getElementById("right");
 
-  function update() {
-    mainArea.innerHTML = `
-      <img src="https://img.youtube.com/vi/${videos[current]}/maxresdefault.jpg">
-    `;
+function update() {
+  mainArea.innerHTML = `
+    <iframe 
+      src="https://www.youtube.com/embed/${videos[current]}?playsinline=1"
+      style="width:100%; height:100%; border:none;"
+      allowfullscreen>
+    </iframe>
+  `;
 
-left.src = `https://img.youtube.com/vi/${
-  videos[(current - 1 + videos.length) % videos.length]
-}/maxresdefault.jpg`;
+  left.src = `https://img.youtube.com/vi/${
+    videos[(current - 1 + videos.length) % videos.length]
+  }/maxresdefault.jpg`;
 
-right.src = `https://img.youtube.com/vi/${
-  videos[(current + 1) % videos.length]
-}/maxresdefault.jpg`;
-
-    mainArea.onclick = () => {
-      mainArea.innerHTML = `
-        <iframe 
-          src="https://www.youtube.com/embed/${videos[current]}?autoplay=1"
-          allow="autoplay"
-          allowfullscreen>
-        </iframe>
-      `;
-    };
-  }
+  right.src = `https://img.youtube.com/vi/${
+    videos[(current + 1) % videos.length]
+  }/maxresdefault.jpg`;
+}
 
   left.onclick = () => {
     current = (current - 1 + videos.length) % videos.length;
