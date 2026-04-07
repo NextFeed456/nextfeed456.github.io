@@ -490,6 +490,8 @@ window.addEventListener("DOMContentLoaded", () => {
   const mainArea = document.getElementById("mainArea");
   const left = document.getElementById("left");
   const right = document.getElementById("right");
+  const prevBtn = document.querySelector(".left-btn");
+  const nextBtn = document.querySelector(".right-btn");
 
 function update() {
   mainArea.innerHTML = `
@@ -519,8 +521,18 @@ function update() {
     update();
   };
 
-  update();
-});
+  prevBtn.onclick = () => {
+    current = (current - 1 + videos.length) % videos.length;
+    update();
+  };
+
+  nextBtn.onclick = () => {
+    current = (current + 1) % videos.length;
+    update();
+  };
+
+    update();
+  });
   
 </script>
   
