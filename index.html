@@ -552,6 +552,25 @@ function update() {
     update();
   };
 
+  let isInteracting = false;
+
+const hero = document.querySelector(".hero");
+
+hero.addEventListener("mouseenter", () => {
+  isInteracting = true;
+});
+
+hero.addEventListener("mouseleave", () => {
+  isInteracting = false;
+});
+
+setInterval(() => {
+  if (!isInteracting) {
+    current = (current + 1) % videos.length;
+    update();
+  }
+}, 5000);
+
     update();
   });
   
