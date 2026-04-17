@@ -118,32 +118,6 @@ nav a:hover {
   width: 60%;
   margin: 40px auto;
 }
-
-/* ツール */
-.tool-section {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  margin-top: 40px;
-}
-
-.tool-text {
-  flex: 1;
-}
-
-.tool-image {
-  flex: 1;
-}
-
-.tool-image img {
-  width: 80%;
-  max-width: 300px;
-  display: block;
-  margin: 0 auto;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
 /* ボタン */
 .btn {
   display: inline-block;
@@ -326,6 +300,58 @@ nav a:hover {
 .right-btn {
   right: 20px;
 }
+  .tool-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.tool-card {
+  position: relative;
+  width: 120px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+}
+
+.tool-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 16px;
+  transition: 0.3s;
+}
+
+.tool-card span {
+  display: block;
+  margin-top: 10px;
+}
+
+.tool-card:hover img {
+  transform: scale(1.1);
+}
+
+.tool-desc {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+
+  background: rgba(0,0,0,0.9);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.tool-card:hover .tool-desc {
+  opacity: 1;
+}
   
 </style>
 </head>
@@ -379,59 +405,41 @@ nav a:hover {
 
 <h2 class="center-title">提供ツール</h2>
 
-<div class="tool-section">
+<div class="tool-grid">
 
-  <div class="tool-text">
-    <h3>配信用 神企画ジェネレーター</h3>
-  <p>
-    配信ネタに困ったらこれ。<br>
-    今伸びる企画を自動生成し、すぐ配信に使える形で提案します。<br>
-    コメントが伸びる企画だけを厳選しています。
-  </p>
+  <a href="/kamikikaku/" class="tool-card">
+    <img src="kikaku.png">
+    <span>神企画</span>
+    <div class="tool-desc">
+      配信ネタを自動生成。<br>
+      今伸びる企画を即提案。
+    </div>
+  </a>
 
-    <a href="/kamikikaku/" class="btn">企画を出す</a>
-  </div>
+  <a href="/samunesindan/" class="tool-card">
+    <img src="thumbnail-check.png">
+    <span>サムネ診断</span>
+    <div class="tool-desc">
+      CTR改善の分析ツール。
+    </div>
+  </a>
 
-  <div class="tool-image">
-    <img src="kikaku.png" alt="企画ジェネレーター">
-  </div>
+  <a href="/youtubebenri/" class="tool-card">
+    <img src="thumbnail.png">
+    <span>サムネ保存</span>
+    <div class="tool-desc">
+      高画質サムネを即取得。
+    </div>
+  </a>
 
-</div>
-
-<div class="tool-section">
-
-  <div class="tool-text">
-    <h3>YouTubeサムネイル診断ツール</h3>
-    <p>
-      色使い・文字配置・視認性などを分析し、クリック率を改善するためのヒントを提供します。<br>
-      サムネイルに悩んでいる方におすすめです。
-    </p>
-
-    <a href="/samunesindan/" class="btn">診断する</a>
-  </div>
-
-  <div class="tool-image">
-    <img src="thumbnail-check.png" alt="サムネイル診断ツール">
-  </div>
-
-</div>
-
-  
-<div class="tool-section">
-
-  <div class="tool-text">
-    <h3>YouTubeサムネイル保存ツール</h3>
-    <p>
-      動画URLを入力するだけで、誰でも簡単に高画質サムネイルを取得できます。<br>
-      動画制作・分析・競合調査などに活用できる便利ツールです。
-    </p>
-
-    <a href="/youtubebenri/" class="btn">保存する</a>
-  </div>
-
-  <div class="tool-image">
-    <img src="thumbnail.png" alt="サムネイル保存ツール">
-  </div>
+  <!-- ←ここに追加 -->
+  <a href="/roulette/" class="tool-card">
+    <img src="roulette.png">
+    <span>ルーレット</span>
+    <div class="tool-desc">
+      配信で使える抽選ツール。
+    </div>
+  </a>
 
 </div>
   
