@@ -3,70 +3,197 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>サムネスライドパズル｜NextFeed</title>
+<title>サムネパズルチャレンジ</title>
 
 <style>
 body {
-  background: #0f172a;
-  color: white;
-  text-align: center;
+  margin: 0;
   font-family: sans-serif;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: white;
 }
 
+/* 全体 */
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* 左側 */
+.left {
+  flex: 1;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.info-boxes {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.box {
+  flex: 1;
+  padding: 15px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+}
+
+.box.blue { border-color: #00d4ff; }
+.box.pink { border-color: #ff3ec9; }
+
+.value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* パズル */
 #game {
   width: 300px;
   height: 300px;
-  margin: 20px auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
+  margin: 20px auto;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .tile {
   width: 100px;
   height: 100px;
-  cursor: pointer;
   background-size: 300px 300px;
+  cursor: pointer;
 }
 
 .empty {
-  background: black;
+  background: #000;
 }
 
-#result {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 5px;
-  max-width: 500px;
-  margin: 20px auto;
+/* ボタン */
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-#result img {
-  width: 100%;
+button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: bold;
   cursor: pointer;
+}
+
+.pause {
+  background: #0ea5e9;
+}
+
+.retry {
+  background: #ec4899;
+}
+
+/* 右側 */
+.right {
+  flex: 1;
+}
+
+.result-box {
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.result-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.result-grid img {
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ネオン風 */
+.neon {
+  text-align: center;
+  font-size: 28px;
+  color: #fff;
+  text-shadow: 0 0 10px #00d4ff, 0 0 20px #ff3ec9;
+  margin-bottom: 15px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>サムネパズルチャレンジ</h1>
-<p>残り時間：<span id="time">180</span>秒</p>
-<p>クリア数：<span id="score">0</span></p>
+<div class="container">
 
-<div id="game"></div>
+  <!-- 左 -->
+  <div class="left">
 
-<h2>クリア履歴</h2>
-<div id="result"></div>
+    <div class="title">サムネパズルチャレンジ</div>
+
+    <div class="info-boxes">
+      <div class="box">
+        <div>残り時間</div>
+        <div class="value" id="time">180</div>
+      </div>
+      <div class="box blue">
+        <div>+10秒</div>
+      </div>
+      <div class="box pink">
+        <div>クリア数</div>
+        <div class="value" id="score">0</div>
+      </div>
+    </div>
+
+    <div id="game"></div>
+
+    <div class="buttons">
+      <button class="pause">一時停止</button>
+      <button class="retry" onclick="location.reload()">リトライ</button>
+    </div>
+
+  </div>
+
+  <!-- 右 -->
+  <div class="right">
+
+    <div class="neon">タイムアップ！</div>
+
+    <div class="result-box">
+      <div class="result-title">今回クリアしたサムネ</div>
+      <div class="result-grid" id="result"></div>
+    </div>
+
+  </div>
+
+</div>
 
 <script>
 
-// ▼ 仮データ
 const videoList = [
   "dQw4w9WgXcQ",
   "3JZ_D3ELwOQ",
-  "kXYiU_JCYtU",
-  "Zi_XLOBDo_Y"
+  "kXYiU_JCYtU"
 ];
 
 let board = [];
@@ -76,18 +203,19 @@ let time = 180;
 let score = 0;
 let clearedList = [];
 
-// ▼ 新しいパズル
+// 初期
+startNewPuzzle();
+
+// パズル生成
 function startNewPuzzle() {
   currentVideo = videoList[Math.floor(Math.random() * videoList.length)];
-
   board = [...Array(9).keys()];
   shuffle(board);
   emptyIndex = board.indexOf(8);
-
   drawBoard();
 }
 
-// ▼ シャッフル
+// シャッフル
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
@@ -95,7 +223,7 @@ function shuffle(arr) {
   }
 }
 
-// ▼ 描画
+// 描画
 function drawBoard() {
   const game = document.getElementById("game");
   game.innerHTML = "";
@@ -112,7 +240,7 @@ function drawBoard() {
       const x = (num % 3) * 100;
       const y = Math.floor(num / 3) * 100;
 
-      // ★ここで下をカット（+30px）
+      // 下カット
       tile.style.backgroundPosition = `-${x}px -${y + 30}px`;
     }
 
@@ -121,25 +249,22 @@ function drawBoard() {
   });
 }
 
-// ▼ 移動
+// 移動
 function move(index) {
-  const validMoves = [index - 1, index + 1, index - 3, index + 3];
-
-  if (validMoves.includes(emptyIndex)) {
+  const valid = [index-1,index+1,index-3,index+3];
+  if(valid.includes(emptyIndex)){
     [board[index], board[emptyIndex]] = [board[emptyIndex], board[index]];
     emptyIndex = index;
-
     drawBoard();
     checkClear();
   }
 }
 
-// ▼ クリア判定
+// クリア
 function checkClear() {
-  if (board.every((v, i) => v === i)) {
+  if (board.every((v,i)=>v===i)) {
     score++;
     time += 10;
-
     document.getElementById("score").innerText = score;
 
     addClear(currentVideo);
@@ -147,47 +272,36 @@ function checkClear() {
   }
 }
 
-// ▼ 履歴追加
-function addClear(videoId) {
-  clearedList.push(videoId);
-
-  if (clearedList.length > 10) {
-    clearedList.shift();
-  }
-
+// 履歴
+function addClear(id) {
+  clearedList.push(id);
+  if(clearedList.length > 10) clearedList.shift();
   showResult();
 }
 
-// ▼ リザルト表示
+// リザルト表示
 function showResult() {
-  const container = document.getElementById("result");
-  container.innerHTML = "";
+  const el = document.getElementById("result");
+  el.innerHTML = "";
 
   clearedList.slice().reverse().forEach(id => {
     const img = document.createElement("img");
     img.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-
-    img.onclick = () => {
-      window.open(`https://www.youtube.com/watch?v=${id}`, "_blank");
-    };
-
-    container.appendChild(img);
+    img.onclick = () => window.open(`https://youtube.com/watch?v=${id}`);
+    el.appendChild(img);
   });
 }
 
-// ▼ タイマー
-setInterval(() => {
+// タイマー
+setInterval(()=>{
   time--;
   document.getElementById("time").innerText = time;
 
-  if (time <= 0) {
-    alert("終了！スコア：" + score);
+  if(time<=0){
+    alert("終了！クリア数："+score);
     location.reload();
   }
-}, 1000);
-
-// ▼ 初期化
-startNewPuzzle();
+},1000);
 
 </script>
 
