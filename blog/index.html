@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ブログ一覧｜NextFeed</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #0f172a;
+  color: #fff;
+}
+
+/* ナビ（トップと同じ） */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 40px;
+  display: flex;
+  gap: 20px;
+  z-index: 9999;
+
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+nav a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: white;
+}
+
+.spacer {
+  height: 70px;
+}
+
+/* セクション */
+.section {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+.center-title {
+  text-align: center;
+  font-size: 26px;
+}
+
+.tool-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.tool-card {
+  width: 220px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+}
+
+.tool-card img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.tool-card:hover {
+  transform: scale(1.05);
+}
+
+/* フッター */
+.site-footer {
+  margin-top: 60px;
+  padding: 40px;
+  text-align: center;
+  border-top: 1px solid #334155;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="/">ホーム</a>
+  <a href="/#about">概要</a>
+  <a href="/blog/">ブログ</a>
+  <a href="/privacy/">ポリシー</a>
+  <a href="/contact/">お問い合わせ</a>
+</nav>
+
+<div class="spacer"></div>
+
+<section class="section">
+<h1 class="center-title">ブログ</h1>
+
+<div class="tool-grid">
+
+<a href="/blog/thumbnail-ctr-impact.html" class="tool-card">
+<img src="/01.png">
+<p>サムネで再生数は変わる？</p>
+</a>
+
+<a href="/blog/stream-idea-generator.html" class="tool-card">
+<img src="/02.png">
+<p>配信ネタが思いつかない人へ</p>
+</a>
+
+<a href="/blog/youtube-growth-basics.html" class="tool-card">
+<img src="/03.png">
+<p>YouTubeを伸ばすために最初にやるべきこと</p>
+</a>
+
+</div>
+
+</section>
+
+<footer class="site-footer">
+<p>© NextFeed</p>
+</footer>
+
+</body>
+</html>
