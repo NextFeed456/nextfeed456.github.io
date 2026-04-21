@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サムネスライドパズル｜NextFeed</title>
+
+<style>
+body {
+  background: #0f172a;
+  color: white;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+#game {
+  width: 300px;
+  height: 300px;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.tile {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  background-size: 300px 300px;
+}
+
+.empty {
+  background: black;
+}
+
+#result {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+#result img {
+  width: 100%;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>サムネパズルチャレンジ</h1>
+<p>残り時間：<span id="time">180</span>秒</p>
+<p>クリア数：<span id="score">0</span></p>
+
+<div id="game"></div>
+
+<h2>クリア履歴</h2>
+<div id="result"></div>
+
+<script>
+
+// ▼ 仮データ
+const videoList = [
+  "dQw4w9WgXcQ",
+  "3JZ_D3ELwOQ",
+  "kXYiU_JCYtU",
+  "Zi_XLOBDo_Y"
+];
+
+let board = [];
+let emptyIndex = 8;
+let currentVideo = "";
+let time = 180;
+let score = 0;
+let clearedList = [];
+
+// ▼ 新しいパズル
+function startNewPuzzle() {
+  currentVideo = videoList[Math.floor(Math.random() * videoList.length)];
+
+  board = [...Array(9).keys()];
+  shuffle(board);
+  emptyIndex = board.indexOf(8);
+
+  drawBoard();
+}
+
+// ▼ シャッフル
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+// ▼ 描画
+function drawBoard() {
+  const game = document.getElementById("game");
+  game.innerHTML = "";
+
+  board.forEach((num, i) => {
+    const tile = document.createElement("div");
+
+    if (num === 8) {
+      tile.className = "tile empty";
+    } else {
+      tile.className = "tile";
+      tile.style.backgroundImage = `url(https://img.youtube.com/vi/${currentVideo}/hqdefault.jpg)`;
+
+      const x = (num % 3) * 100;
+      const y = Math.floor(num / 3) * 100;
+
+      // ★ここで下をカット（+30px）
+      tile.style.backgroundPosition = `-${x}px -${y + 30}px`;
+    }
+
+    tile.onclick = () => move(i);
+    game.appendChild(tile);
+  });
+}
+
+// ▼ 移動
+function move(index) {
+  const validMoves = [index - 1, index + 1, index - 3, index + 3];
+
+  if (validMoves.includes(emptyIndex)) {
+    [board[index], board[emptyIndex]] = [board[emptyIndex], board[index]];
+    emptyIndex = index;
+
+    drawBoard();
+    checkClear();
+  }
+}
+
+// ▼ クリア判定
+function checkClear() {
+  if (board.every((v, i) => v === i)) {
+    score++;
+    time += 10;
+
+    document.getElementById("score").innerText = score;
+
+    addClear(currentVideo);
+    startNewPuzzle();
+  }
+}
+
+// ▼ 履歴追加
+function addClear(videoId) {
+  clearedList.push(videoId);
+
+  if (clearedList.length > 10) {
+    clearedList.shift();
+  }
+
+  showResult();
+}
+
+// ▼ リザルト表示
+function showResult() {
+  const container = document.getElementById("result");
+  container.innerHTML = "";
+
+  clearedList.slice().reverse().forEach(id => {
+    const img = document.createElement("img");
+    img.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+
+    img.onclick = () => {
+      window.open(`https://www.youtube.com/watch?v=${id}`, "_blank");
+    };
+
+    container.appendChild(img);
+  });
+}
+
+// ▼ タイマー
+setInterval(() => {
+  time--;
+  document.getElementById("time").innerText = time;
+
+  if (time <= 0) {
+    alert("終了！スコア：" + score);
+    location.reload();
+  }
+}, 1000);
+
+// ▼ 初期化
+startNewPuzzle();
+
+</script>
+
+</body>
+</html>
